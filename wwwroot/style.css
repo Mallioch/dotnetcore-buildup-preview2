@@ -1,0 +1,12 @@
+body {
+    background-color: #EEE;
+    font-family: Helvetica, Verdana, sans-serif;
+}
+
+.container {
+    background-color: #FFF;
+    border: solid 1px #DDD;
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 20px;
+}

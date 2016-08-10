@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace BuildUp
 {
@@ -8,6 +9,7 @@ namespace BuildUp
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();
 
