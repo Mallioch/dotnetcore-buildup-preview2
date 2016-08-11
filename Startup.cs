@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Builder; //For IApplicationBuilder
 using Microsoft.AspNetCore.Http;    //For Response.WriteAsync
 using Microsoft.Extensions.DependencyInjection; //For IServiceCollection
-
-using System;
+using Microsoft.Extensions.Logging; //For ILoggerFactory
 using Microsoft.AspNetCore.Hosting;
 
 namespace BuildUp
@@ -16,14 +15,16 @@ namespace BuildUp
         }
 
         //Configure your middleware pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            Console.WriteLine("hi" + env.ContentRootPath);
+            loggerFactory.AddConsole();
 
             app.UseStaticFiles();
 
             app.Run(async (context) =>
             {
+                var logger = loggerFactory.CreateLogger("Pipeline End");
+                logger.LogInformation("You have reached the end of the middleware pipeline");
                 await context.Response.WriteAsync("Hello World!");
             });
         }
