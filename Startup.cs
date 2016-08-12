@@ -16,9 +16,14 @@ namespace BuildUp
         }
 
         //Configure your middleware pipeline
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
             loggerFactory.AddConsole();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseMiddleware<ComeAtMeBroMiddleware>();
             app.UseStaticFiles();
