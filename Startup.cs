@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;    //For Response.WriteAsync
 using Microsoft.Extensions.DependencyInjection; //For IServiceCollection
 using Microsoft.Extensions.Logging; //For ILoggerFactory
 using Microsoft.AspNetCore.Hosting;
+using BuildUp.Middleware;
 
 namespace BuildUp
 {
@@ -19,6 +20,7 @@ namespace BuildUp
         {
             loggerFactory.AddConsole();
 
+            app.UseMiddleware<ComeAtMeBroMiddleware>();
             app.UseStaticFiles();
 
             app.Run(async (context) =>
